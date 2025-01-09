@@ -1,20 +1,20 @@
 [project]
 name = "llm-structure"
 version = "0.1.0"
-description = "An llm plugin to add structured JSON output support to any model"
+description = "An llm plugin to add structured JSON output support to LLMs"
 readme = "README.md"
-requires-python = ">=3.8"
-authors = [{name = "kmad"}]
+requires-python = ">=3.10"
+authors = [{name = "Kevin Madura"}]
 license = {text = "Apache-2.0"}
 classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.10",
     "Topic :: Software Development :: Libraries :: Python Modules"
 ]
 dependencies = [
     "llm>=0.16",
-    "click>=8.0.0"
+    "click>=8.0.0",
 ]
 
 [project.urls]

@@ -4,7 +4,6 @@ from typing import Dict, Any, Type, List
 import yaml
 from pydantic import BaseModel, create_model
 
-
 def resolve_ref(ref: str, schema_dict: Dict) -> Dict:
     """Resolve a $ref reference in the schema."""
     if not ref.startswith("#/"):
@@ -137,15 +136,6 @@ def register_commands(cli):
                     print(result)
                 else:
                     raise click.BadParameter("No response from model")
-            elif "gemini" in model_id:
-                client = model_instance.get_client()
-                response = client.beta.chat.completions.parse(
-                    model=model_id,
-                    messages=[{"role": "user", "content": prompt}],
-                    response_format=DynamicModel,
-                )
-                result = response.choices[0].message.content
-                print(result)
             else:
                 raise click.BadParameter("Model does not support structured output")
 
