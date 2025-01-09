@@ -3,6 +3,7 @@ import click
 from typing import Dict, Any, Type, List
 import yaml
 from pydantic import BaseModel, create_model
+import sys
 
 
 def resolve_ref(ref: str, schema_dict: Dict) -> Dict:
@@ -96,7 +97,7 @@ def register_commands(cli):
     """Register the structure command with the CLI."""
 
     @cli.command()
-    @click.argument("prompt")
+    @click.argument("prompt", type=click.STRING)
     @click.option("--schema", help="JSON schema to parse against", required=True)
     @click.option(
         "-m", "--model", default="gpt-4o", help="Model to use for structured output"
@@ -107,6 +108,11 @@ def register_commands(cli):
         The output will be validated against the provided JSON schema.
         The model must support JSON mode/structured output.
         """
+
+        if prompt == "-":
+            # Read from stdin
+            prompt = sys.stdin.read()
+
         try:
             # Load schema from file
             with open(schema) as f:
