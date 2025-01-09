@@ -1,0 +1,25 @@
+[project]
+name = "llm-structure"
+version = "0.1.0"
+description = "An llm plugin to add structured JSON output support to any model"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{name = "kmad"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+dependencies = [
+    "llm>=0.16",
+    "click>=8.0.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/kmad/llm-structure"
+Issues = "https://github.com/kmad/llm-structure/issues"
+
+[project.entry-points.llm]
+structure = "llm_structure"
