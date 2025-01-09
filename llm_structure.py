@@ -4,6 +4,7 @@ from typing import Dict, Any, Type, List
 import yaml
 from pydantic import BaseModel, create_model
 
+
 def resolve_ref(ref: str, schema_dict: Dict) -> Dict:
     """Resolve a $ref reference in the schema."""
     if not ref.startswith("#/"):
@@ -36,7 +37,6 @@ def create_models_from_schema(schema_dict: Dict) -> Dict[str, Type[BaseModel]]:
             }
             return parse_schema_to_pydantic_model(referenced_schema)
 
-        # If the schema is in the format {'ModelName': {'field': 'type', ...}}
         if len(schema_dict) == 1 and isinstance(next(iter(schema_dict.values())), dict):
             model_name = next(iter(schema_dict.keys()))
             fields_dict = next(iter(schema_dict.values()))
@@ -99,7 +99,7 @@ def register_commands(cli):
     @click.argument("prompt")
     @click.option("--schema", help="JSON schema to parse against", required=True)
     @click.option(
-        "-m", "--model", default="gpt-4", help="Model to use for structured output"
+        "-m", "--model", default="gpt-4o", help="Model to use for structured output"
     )
     def structure(prompt: str, schema: str, model: str):
         """Generate structured output based on a JSON schema.
@@ -122,6 +122,15 @@ def register_commands(cli):
             # Get the model instance
             model_instance = llm.get_model(model)
             model_id = model_instance.model_id
+
+            # Supported models per: https://platform.openai.com/docs/guides/structured-outputs/examples#supported-schemas
+            # o1-2024-12-17 and later
+            # gpt-4o-mini-2024-07-18 and later
+            # gpt-4o-2024-08-06 and later
+
+            # TODO: Make supported models detection more robust
+            # TODO: Add Gemini native support
+            # TODO: Add instructor for all other models
 
             if ("o1" in model_id or "gpt-4o" in model_id) and model_id != "gpt-4":
                 client = model_instance.get_client()
