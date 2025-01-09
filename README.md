@@ -1,4 +1,4 @@
-# LLM Structured Outputs
+# Structured Outputs for `llm`
 
 <!-- [![PyPI version](https://badge.fury.io/py/llm-structure.svg)](https://badge.fury.io/py/llm-structure)
 [![Python](https://img.shields.io/pypi/pyversions/llm-structure.svg)](https://pypi.org/project/llm-structure/) -->
