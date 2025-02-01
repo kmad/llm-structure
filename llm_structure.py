@@ -133,12 +133,13 @@ def register_commands(cli):
             # o1-2024-12-17 and later
             # gpt-4o-mini-2024-07-18 and later
             # gpt-4o-2024-08-06 and later
+            # o3-mini
 
             # TODO: Make supported models detection more robust
             # TODO: Add Gemini native support
             # TODO: Add instructor for all other models
 
-            if ("o1" in model_id or "gpt-4o" in model_id) and model_id != "gpt-4":
+            if ("o3" in model_id or "o1" in model_id or "gpt-4o" in model_id) and model_id != "gpt-4":
                 client = model_instance.get_client()
                 schema = DynamicModel.model_json_schema()
                 response = client.beta.chat.completions.parse(
